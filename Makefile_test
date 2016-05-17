@@ -1,0 +1,37 @@
+
+all: DEFAULT
+thread_lib =  ./pthread_library
+PROG = test
+thread_o = $(thread_lib)/common.o $(thread_lib)/thread.o
+DEFAULT: $(PROG)
+
+
+CCPATH   = /usr/bin/g++
+ 
+
+
+# Compile the application code
+objects = $(PROG).o 
+CCFLAG = -g #-pg
+
+$(PROG).o: $(PROG).cpp NDR_Solver.cpp 
+	$(CCPATH) $(CCFLAG) -o $(PROG).o \
+	 -c $(PROG).cpp 
+
+
+	
+
+# Link the executable
+
+$(PROG): $(PROG).o 
+	$(CCPATH) $(CCFLAG)  -o $(PROG)  $(PROG).o
+          
+
+
+
+
+
+clean: 
+	@/bin/rm  -rf $(PROG).o 
+	@/bin/rm  -rf $(PROG)
+	@/bin/rm -rf *.o
